@@ -4,7 +4,7 @@ Install
 create conda
 ------------
 
-首先，创建一个虚拟环境
+First , create a virtual environment (recommend anaconda)
 
 .. code-block:: python
 
@@ -14,7 +14,7 @@ create conda
 install by pypi
 ---------------
 
-可以通过pip直接安装所需要的包
+If use deepke directly
 
 .. code-block:: python
 
@@ -24,7 +24,7 @@ install by pypi
 install by setup.py
 -------------------
 
-可以根据需要修改源码或者setup.py中的配置，在进行安装
+If modify source codes before usage
 
 .. code-block:: python
 

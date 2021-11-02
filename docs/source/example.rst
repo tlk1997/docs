@@ -3,12 +3,11 @@ Example
 
 standard_ner
 ------------
-
-进入 ``example/ner/standard`` 可使用全监督实体抽取模型。
-
-在 ``data`` 文件夹下存放数据，训练等参数都在 ``conf`` 文件夹中，可修改使用。
-
-运行 `run.py` 即可进行训练，运行 `predict.py` 即可进行预测。
+- The standard module is implemented by the pretrained model BERT. 
+- Enter  ``DeepKE/example/ner/standard`` .
+- The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
+- **Train**: `python run.py`
+- **Predict**: `python predict.py`
 
 .. code-block:: bash
 
@@ -20,17 +19,12 @@ standard_ner
 
 few-shot_ner
 ------------
-
-进入 ``example/ner/few-shot`` 可使用少样本实体抽取模型。
-
-在 ``data`` 文件夹下存放数据，包含 `conll2003` ， `mit-movie` ， `mit-restaurant` 和 `atis` 等数据集。
-
-训练等参数都在 ``conf`` 文件夹中，可修改使用。
-
-运行 `python run.py` 即可对conll2003数据集进行训练，`python run.py +train=few_shot` 可进行少样本训练。
-
-在 `config.yaml` 中加入 `- predict`  ， 再在 `predict.yaml` 中修改 `load_path` 为模型路径以及 `write_path` 为预测结果保存路径，再 `python predict.py` 可进行预测。
-
+- This module is in the low-resouce scenario.
+- Enter  ``DeepKE/example/ner/few-shot`` . 
+- The directory where the model is loaded and saved and the configuration parameters can be cusomized in the ``conf`` folder.
+- **Train with CoNLL-2003**: `python run.py`
+- **Train in the few-shot scenario**: `python run.py +train=few_shot`. Users can modify `load_path` in ``conf/train/few_shot.yaml`` with the use of existing loaded model.
+- **Predict**: add `- predict` to ``conf/config.yaml`` , modify `loda_path` as the model path and `write_path` as the path where the predicted results are saved in ``conf/predict.yaml`` , and then run `python predict.py`
 
 .. code-block:: bash
 
@@ -42,11 +36,11 @@ few-shot_ner
 
 standard_re
 -----------
-进入 ``example/re/standard`` 可使用全监督关系抽取模型。
-
-在 ``data/origin`` 文件夹下存放数据，训练等参数都在 ``conf`` 文件夹中，可修改使用。
-
-运行 `python run.py` 即可进行训练，运行 `python redict.py` 即可进行预测。
+- The standard module is implemented by common deep learning models, including CNN, RNN, Capsule, GCN, Transformer and the pretrained model.
+- Enter the ``DeepKE/example/re/standard`` folder. 
+- The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
+- **Train**: `python run.py`
+- **Predict**: `python predict.py`
 
 .. code-block:: bash
 
@@ -58,16 +52,12 @@ standard_re
 
 few-shot_re
 -----------
-
-进入 ``example/re/few-shot`` 可使用少样本关系抽取模型。
-
-在 ``data`` 文件夹下存放数据，模型采用的数据集是SEMEVAL，SEMEVAL数据集来自于2010年的国际语义评测大会中 `Task 8："Multi-Way Classification of Semantic Relations Between Pairs of Nominals"` 。
-
-训练等参数都在 ``conf`` 文件夹中，可修改使用。
-
-运行 `python run.py` 即可进行训练,设置 ``conf`` 中 `train_from_saved_model` 为上次保存模型的路径即可从上次训练的模型开始训练
-
-运行 `python predict.py` 即可进行预测。
+- This module is in the low-resouce scenario.
+- Enter ``DeepKE/example/re/few-shot`` .
+- **Train**: `python run.py`
+  Start with the model trained last time: modify `train_from_saved_model` in ``conf/train.yaml`` as the path where the model trained last time was saved. 
+  And the path saving logs generated in training can be customized by ``log_dir``.
+- **Predict**: `python predict.py`
 
 .. code-block:: bash
 
@@ -79,16 +69,12 @@ few-shot_re
 
 document_re
 -----------
-
-进入 ``example/re/document`` 可使用全监督关系抽取模型。
-
-在 ``data`` 文件夹下存放数据，模型采用的数据集是 `DocRED` ，其中包含的 `train_distant.json` 由于文件太大，可自行从 https://drive.google.com/drive/folders/1c5-0YwnoJx8NS6CV2f-NoTHR__BdkNqw 上下载到data/目录下
-
-训练等参数都在 ``conf`` 文件夹中，可修改使用。
-
-运行 `python run.py` 即可进行训练，设置 ``conf`` 中 `train_from_saved_model` 为上次保存模型的路径即可从上次训练的模型开始训练。
-
-运行 `python redict.py` 即可进行预测。最终生成的 `result.json` 文件保存在根目录。
+- Download the model `train_distant.json` from [*Google Drive*](https://drive.google.com/drive/folders/1c5-0YwnoJx8NS6CV2f-NoTHR__BdkNqw) to ``data/``.
+- Enter ``DeepKE/example/re/document`` .
+- **Train**: `python run.py`
+  Start with the model trained last time: modify `train_from_saved_model` in ``conf/train.yaml`` as the path where the model trained last time was saved. 
+  And the path saving logs generated in training can be customized by ``log_dir``.
+- **Predict**: `python predict.py`
 
 .. code-block:: bash
 
@@ -100,19 +86,19 @@ document_re
 
 standard_ae
 -----------
-进入 ``example/ae/standard`` 可使用全监督属性抽取模型。
-
-在 ``data/origin`` 文件夹下存放数据，训练等参数都在 ``conf`` 文件夹中，可修改使用。
-
-运行 `python run.py` 即可进行训练，运行 `python predict.py` 即可进行预测。
+- The standard module is implemented by common deep learning models, including CNN, RNN, Capsule, GCN, Transformer and the pretrained model.
+- Enter the ``DeepKE/example/ae/standard`` folder. 
+- The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
+- **Train**: `python run.py`
+- **Predict**: `python predict.py`
 
 .. code-block:: bash
 
-    cd example/ae/standard
+    cd example/ae/regular
 
     python run.py
-    
+
     python predict.py
 
 
-具体流程，请参考 https://www.bilibili.com/video/BV1n44y1x7iW?spm_id_from=333.999.0.0
+More details , you can refer to https://www.bilibili.com/video/BV1n44y1x7iW?spm_id_from=333.999.0.0 .
