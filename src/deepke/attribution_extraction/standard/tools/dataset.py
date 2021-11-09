@@ -9,12 +9,12 @@ def collate_fn(cfg):
     
     def collate_fn_intra(batch):
         """
-    Arg : 
-        batch () : Data
-    Returna : 
-        x (dict) : key is the words，and value is its length.
-        y (List) : Collection of key-values pairs.
-    """
+        Arg : 
+            batch () : Data
+        Returns : 
+            x (dict) : key is the words，and value is its length.
+            y (List) : Collection of key-values pairs.
+        """
         batch.sort(key=lambda data: data['seq_len'], reverse=True)
 
         max_len = batch[0]['seq_len']

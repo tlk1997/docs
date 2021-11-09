@@ -47,6 +47,7 @@ class TransformerAttention(nn.Module):
 
     def forward(self, x, key_padding_mask=None, attention_mask=None, head_mask=None):
         """
+        Args :
             x: [B, L, Hs]
             attention_mask: [B, L] After padding, 0 is added at the end of the sentence, the position of 0 is True, and the front part is False
             head_mask: [L] [N,L]

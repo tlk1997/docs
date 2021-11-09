@@ -49,7 +49,6 @@ def train(epoch, model, dataloader, optimizer, criterion, device, writer, cfg):
         data_total = len(dataloader.dataset)
         data_cal = data_total if batch_idx == len(dataloader) else batch_idx * len(y)
         if (cfg.train_log and batch_idx % cfg.log_interval == 0) or batch_idx == len(dataloader):
-            # p r f1 皆为 macro，因为micro时三者相同，定义为acc
             acc, p, r, f1 = metric.compute()
             logger.info(f'Train Epoch {epoch}: [{data_cal}/{data_total} ({100. * data_cal / data_total:.0f}%)]\t'
                         f'Loss: {loss.item():.6f}')

@@ -14,19 +14,20 @@ class GELU(nn.Module):
 
 class CNN(nn.Module):
     """
-    nlp 里为了保证输出的句长 = 输入的句长，一般使用奇数 kernel_size，如 [3, 5, 7, 9]
-    当然也可以不等长输出，keep_length 设为 False
-    此时，padding = k // 2
-    stride 一般为 1
+    In order to ensure that the output sentence length = the input sentence length in nlp, an odd kernel_size is generally used, such as [3, 5, 7, 9]. 
+    Of course, it can also be output with different lengths. 
+    Keep_length is set to False. 
+    At this time, padding = k / / 2, stride is generally 1
     """
     def __init__(self, config):
         """
-        in_channels      : 一般就是 word embedding 的维度，或者 hidden size 的维度
-        out_channels     : int
-        kernel_sizes     : list 为了保证输出长度=输入长度，必须为奇数: 3, 5, 7...
-        activation       : [relu, lrelu, prelu, selu, celu, gelu, sigmoid, tanh]
-        pooling_strategy : [max, avg, cls]
-        dropout:         : float
+        Args:
+            in_channels: Generally it is the dimension of word embedding, or the dimension of hidden size
+            out_channels: int
+            kernel_sizes: In order to ensure that the output length = the input length, list must be an odd number: 3, 5, 7...
+            activation: [relu, lrelu, prelu, selu, celu, gelu, sigmoid, tanh]
+            pooling_strategy : [max, avg, cls]
+            dropout: float
         """
         super(CNN, self).__init__()
 
@@ -74,11 +75,10 @@ class CNN(nn.Module):
 
     def forward(self, x, mask=None):
         """
-            :param x: torch.Tensor [batch_size, seq_max_length, input_size], [B, L, H] 一般是经过embedding后的值
-            :param mask: [batch_size, max_len], 句长部分为0，padding部分为1。不影响卷积运算，max-pool一定不会pool到pad为0的位置
-            :return:
+        Args:
+            x: torch.Tensor [batch_size, seq_max_length, input_size], [B, L, H] Generally the value after embedding
+            mask: [batch_size, max_len], The sentence length part is 0, and the padding part is 1. Does not affect the convolution operation, max-pool will not pool to the position where pad is 0
         """
-        # [B, L, H] -> [B, H, L] （注释：将 H 维度当作输入 channel 维度)
         x = torch.transpose(x, 1, 2)
 
         # convolution + activation  [[B, H, L], ... ]

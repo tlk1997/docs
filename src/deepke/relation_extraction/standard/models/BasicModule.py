@@ -6,7 +6,7 @@ import torch.nn as nn
 
 class BasicModule(nn.Module):
     '''
-    封装nn.Module, 提供 save 和 load 方法
+    Encapsulate nn.module and provide save and load methods
     '''
     def __init__(self):
         super(BasicModule, self).__init__()
@@ -14,14 +14,14 @@ class BasicModule(nn.Module):
 
     def load(self, path, device):
         '''
-        加载指定路径的模型
+        Load the specified path model 
         '''
         self.load_state_dict(torch.load(path, map_location=device))
 
 
     def save(self, epoch=0, cfg=None):
         '''
-        保存模型，默认使用“模型名字+时间”作为文件名
+        Save the model and use "model name + time" as the file name by default
         '''
         time_prefix = time.strftime('%Y-%m-%d_%H-%M-%S')
         prefix = os.path.join(cfg.cwd, 'checkpoints',time_prefix)

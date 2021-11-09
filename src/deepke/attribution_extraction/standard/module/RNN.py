@@ -29,9 +29,7 @@ class RNN(nn.Module):
                        bias=True,
                        batch_first=True)
 
-        # 有bug
-        # self._init_weights()
-
+        
     def _init_weights(self):
         """orthogonal init yields generally good results than uniform init"""
         gain = 1  # use default value

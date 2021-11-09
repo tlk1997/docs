@@ -23,12 +23,12 @@ Path = str
 
 def load_pkl(fp: Path, verbose: bool = True) -> Any:
     """
-    读取文件
+    Read from pkl file
     Args :
-        fp (String) : 读取数据地址
-        verbose (bool) : 是否打印日志
+        fp (String) : Address of data
+        verbose (bool) : Whether to print log
     Return : 
-        data (Any) : 读取的数据
+        data (Any) : Data after reading
     """
     if verbose:
         logger.info(f'load data from {fp}')
@@ -40,11 +40,11 @@ def load_pkl(fp: Path, verbose: bool = True) -> Any:
 
 def save_pkl(data: Any, fp: Path, verbose: bool = True) -> None:
     """
-    保存文件
+    Save as pkl file
     Args :
-        data (Any) : 数据
-        fp (String) :保存的地址
-        verbose (bool) : 是否打印日志
+        data (Any) : Data to save
+        fp (String) : Address of data
+        verbose (bool) : Whether to print log
     """
     if verbose:
         logger.info(f'save data in {fp}')
@@ -55,13 +55,13 @@ def save_pkl(data: Any, fp: Path, verbose: bool = True) -> None:
 
 def load_csv(fp: Path, is_tsv: bool = False, verbose: bool = True) -> List:
     """
-    读取csv格式文件
+    Read from csv file
     Args :
-        fp (String) : 保存地址
-        is_tsv (bool) : 是否为excel-tab格式
-        verbose (bool) : 是否打印日志
+        fp (String) : Address of data
+        is_tsv (bool) : Whether it is in excel-tab format
+        verbose (bool) : Whether to print log
     Return :
-        list(reader) (List): 读取的List数据
+        list(reader) (List): List data after reading
     """
     if verbose:
         logger.info(f'load csv from {fp}')
@@ -74,13 +74,13 @@ def load_csv(fp: Path, is_tsv: bool = False, verbose: bool = True) -> List:
 
 def save_csv(data: List[Dict], fp: Path, save_in_tsv: False, write_head=True, verbose=True) -> None:
     """
-    保存csv格式文件
+    Save as csv file
     Args :
-        data (List) : 所需保存的List数据
-        fp (String) : 保存地址
-        save_in_tsv (bool) : 是否保存为excel-tab格式
-        write_head (bool) : 是否写表头
-        verbose (bool) : 是否打印日志
+        data (List) : List data for saving
+        fp (String) : Address of data
+        save_in_tsv (bool) : Whether it is in excel-tab format
+        write_head (bool) : Whether to write head
+        verbose (bool) : Whether to print log
     """
     if verbose:
         logger.info(f'save csv file in: {fp}')
@@ -97,12 +97,12 @@ def save_csv(data: List[Dict], fp: Path, save_in_tsv: False, write_head=True, ve
 def load_jsonld(fp: Path, verbose: bool = True) -> List:
    
     """
-    读取jsonld文件
+    Read from jsonld file
     Args:
-        fp (String): jsonld 文件地址
-        verbose (bool): 是否打印日志
+        fp (String): Address of data
+        verbose (bool): Whether to print log
     Return: 
-        datas (List) : 读取后的List
+        datas (List) : List data after reading
     """
     if verbose:
         logger.info(f'load jsonld from {fp}')
@@ -119,19 +119,19 @@ def load_jsonld(fp: Path, verbose: bool = True) -> List:
 
 def save_jsonld(fp):
     """
-    保存jsonld格式文件
+    Save as jsonld file
     """
     pass
 
 
 def jsonld2csv(fp: str, verbose: bool = True) -> str:
     """
-    读入 jsonld 文件，存储在同位置同名的 csv 文件
+    Transfor json file to csv file 
     Args:
-        fp (String): jsonld 文件地址
-        verbose (bool): 是否打印日志
+        fp (String): Address of jsonld file
+        verbose (bool): Whether to print log
     Return: 
-        fp_new (String):文件地址
+        fp_new (String): Address of new file
     """
     data = []
     root, ext = os.path.splitext(fp)
@@ -156,12 +156,12 @@ def jsonld2csv(fp: str, verbose: bool = True) -> str:
 
 def csv2jsonld(fp: str, verbose: bool = True) -> str:
     """
-    读入 csv 文件，存储在同位置同名的 jsonld 文件
+    Transfor csv file to jsonld file 
     Args:
-        fp (String): csv 文件地址
-        verbose (bool): 是否打印日志
+        fp (String): Address of csv file
+        verbose (bool): Whether to print
     Return: 
-        fp_new (String):文件地址
+        fp_new (String): Address of new file 
     """
     data = []
     root, ext = os.path.splitext(fp)

@@ -23,13 +23,12 @@ __all__ = [
 ]
 def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
     """
-    处理句子长度，设定句长限制
+    Handle sentence length,and set sentence length limit.
     Args :
-        pos (List[int]) : 句子对应的List
-        limit (int) : 限制的数
+        pos (List[int]) : List of sentence
+        limit (int) : Limit number
     Return :
-        [p + limit + 1 for p in pos] (List[int]) : 处理后的结果
-
+        [p + limit + 1 for p in pos] (List[int]) : Results after handling
     """
     for i, p in enumerate(pos):
         if p > limit:
@@ -41,10 +40,10 @@ def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
 
 def _add_pos_seq(train_data: List[Dict], cfg):
     """
-    增加位置序列
+    Add position sequence
     Args : 
-        train_data (List[Dict]) : 数据集合
-        cfg : 配置文件
+        train_data (List[Dict]) : Training data
+        cfg : Config file
     """
     for d in train_data:
         entities_idx = [d['head_idx'], d['tail_idx']
@@ -58,18 +57,16 @@ def _add_pos_seq(train_data: List[Dict], cfg):
 
         if cfg.model_name == 'cnn':
             if cfg.use_pcnn:
-                # 当句子无法分隔成三段时，无法使用PCNN
-                # 比如： [head, ... tail] or [... head, tail, ...] 无法使用统一方式 mask 分段
                 d['entities_pos'] = [1] * (entities_idx[0] + 1) + [2] * (entities_idx[1] - entities_idx[0] - 1) +\
                                     [3] * (d['seq_len'] - entities_idx[1])
 
 
 def _convert_tokens_into_index(data: List[Dict], vocab):
     """
-    将tokens转换成index值
+    Convert tokens to index 
     Args : 
-        data (List[Dict]) : 数据集合
-        vocab (Class) : 词汇表
+        data (List[Dict]) : Data
+        vocab (Class) : Vocabulary 
     """
     unk_str = '[UNK]'
     unk_idx = vocab.word2idx[unk_str]
@@ -81,11 +78,11 @@ def _convert_tokens_into_index(data: List[Dict], vocab):
 
 def _serialize_sentence(data: List[Dict], serial, cfg):
     """
-    将句子分词
+    Sentence to tokens
     Args : 
-        data (List[Dict]) : 数据集合
-        serial (Class): Serializer类
-        cfg : 配置文件
+        data (List[Dict]) : Data 
+        serial (Class): Serializer class
+        cfg : Config file
     """
     for d in data:
         sent = d['sentence'].strip()
@@ -108,10 +105,10 @@ def _serialize_sentence(data: List[Dict], serial, cfg):
 
 def _lm_serialize(data: List[Dict], cfg):
     """
-    lm模型分词
-    Args : 
-        data (List[Dict]) : 数据集合
-        cfg : 配置文件
+    LM model to serialize
+    Args :
+        data (List[Dict]) : Data
+        cfg : Config file
     """
     logger.info('use bert tokenizer...')
     tokenizer = BertTokenizer.from_pretrained(cfg.lm_file)
@@ -125,10 +122,10 @@ def _lm_serialize(data: List[Dict], cfg):
 
 def _add_relation_data(rels: Dict, data: List) -> None:
     """
-    增加关系数据
+    Add relation data
     Args :
-        rels (Dict) : 关系字典集合
-        data (List) : 所需增加的关系数据
+        rels (Dict) : Relation Dict
+        data (List) : Data to add relation
     """
     for d in data:
         d['rel2idx'] = rels[d['relation']]['index']
@@ -138,11 +135,11 @@ def _add_relation_data(rels: Dict, data: List) -> None:
 
 def _handle_relation_data(relation_data: List[Dict]) -> Dict:
     """
-    处理关系数据，每一个关系有index，head_type,tail_type三个属性
+    Handle relation data 
     Arg : 
-        relation_data (List[Dict]) : 所需要处理的关系数据
+        relation_data (List[Dict]) : Data
     Return :
-        rels (Dict) : 处理之后的结果
+        rels (Dict) : Results after handling
     """
     rels = OrderedDict()
     relation_data = sorted(relation_data, key=lambda i: int(i['index']))
@@ -157,7 +154,7 @@ def _handle_relation_data(relation_data: List[Dict]) -> Dict:
 
 def preprocess(cfg):
     """
-    数据预处理阶段
+    Preprocess data
     """
     logger.info('===== start preprocess data =====')
     train_fp = os.path.join(cfg.cwd, cfg.data_path, 'train.csv')

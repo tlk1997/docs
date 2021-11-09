@@ -16,12 +16,12 @@ class Serializer():
 
     def serialize(self, text, never_split: List = None):
         """
-        将一段文本按照制定拆分规则，拆分成一个词汇List
+        Split a piece of text into a vocabulary list according to the established splitting rules
         Args :
-            text (String) : 所需拆分文本
-            never_split (List) : 不拆分的词，默认为空
+            text (String) : Text for spliting
+            never_split (List) : Words not to be split, empty by default
         Rerurn : 
-            output_tokens (List): 拆分后的结果 
+            output_tokens (List): Results after spliting
         """
         never_split = self.never_split + (never_split if never_split is not None else [])
         text = self._clean_text(text)
@@ -45,11 +45,11 @@ class Serializer():
 
     def _clean_text(self, text):
         """
-        删除文本中无效字符以及空白字符
+        Delete invalid characters and blank characters in the text
         Arg :
-            text (String) : 所需删除的文本
+            text (String) : Text to be deleted
         Return :
-            "".join(output) (String) : 删除后的文本
+            "".join(output) (String) : Text after deleted
         """
         output = []
         for char in text:
@@ -64,12 +64,12 @@ class Serializer():
 
     def _use_jieba_cut(self, text, never_split):
         """
-        使用jieba分词
+        Use jieba
         Args :
-            text (String) : 所需拆分文本
-            never_split (List) : 不拆分的词
+            text (String) : Text to be splited
+            never_split (List) : Words not to be split
         Return :
-            tokens (List) : 拆分完的结果
+            tokens (List) : Text after splited
         """
         for word in never_split:
             jieba.suggest_freq(word, True)
@@ -84,11 +84,11 @@ class Serializer():
 
     def _tokenize_chinese_chars(self, text):
         """
-        在CJK字符周围添加空格
+        Add spaces around CJK characters
         Arg :
-            text (String) : 所需拆分文本
+            text (String) : Text to be added
         Return :
-            "".join(output) (String) : 添加完后的文本
+            "".join(output) (String) : Text after added
         """
         output = []
         for char in text:
@@ -103,11 +103,11 @@ class Serializer():
 
     def _orig_tokenize(self, text):
         """
-        在空白和一些标点符号（如逗号或句点）上拆分文本
+        Split text on white space and some punctuation marks (such as commas or periods)
         Arg :
-            text (String) : 所需拆分文本
+            text (String) : Text to be splited
         Return :
-            tokens (List) : 分词完的结果
+            tokens (List) : Text after splited
         """
         text = text.strip()
         if not text:
@@ -120,11 +120,11 @@ class Serializer():
 
     def _whitespace_tokenize(self, text):
         """
-        进行基本的空白字符清理和分割
+        Perform basic whitespace cleaning and segmentation
         Arg :
-            text (String) : 所需拆分文本
+            text (String) : Text to be splited
         Return :
-            tokens (List) : 分词完的结果
+            tokens (List) : Text after splited
         """
         text = text.strip()
         if not text:
@@ -134,12 +134,11 @@ class Serializer():
 
     def _run_strip_accents(self, text):
         """
-        从文本中去除重音符号
+        Delete accent marks from text
         Arg :
-            text (String) : 所需拆分文本
+            text (String) : Text to be deleted
         Return :
-            "".join(output) (String) : 去除后的文本
-
+            "".join(output) (String) : Text to after deleted
         """
         text = unicodedata.normalize("NFD", text)
         output = []
@@ -152,12 +151,12 @@ class Serializer():
 
     def _run_split_on_punc(self, text, never_split=None):
         """
-        通过标点符号拆分文本
+        Split text by punctuation
         Args :
-            text (String) : 所需拆分文本
-            never_split (List) : 不拆分的词，默认为空
+            text (String) : Text to be splited
+            never_split (List) : Words not to be split, empty by default
         Return :
-            ["".join(x) for x in output] (List) : 拆分完的结果
+            ["".join(x) for x in output] (List) : Text to after splited
         """
         
         if never_split is not None and text in never_split:
@@ -183,11 +182,11 @@ class Serializer():
     @staticmethod
     def is_control(char):
         """
-        判断字符是否为控制字符
+        Determine whether the character is a control character
         Arg :
-            char : 字符
+            char : Character
         Return :
-            bool : 判断结果
+            bool : Result
         """
         if char == "\t" or char == "\n" or char == "\r":
             return False
@@ -199,11 +198,11 @@ class Serializer():
     @staticmethod
     def is_whitespace(char):
         """
-        判断字符是否为空白字符
+        Determine whether the character is a whitespace character
         Arg :
-            char : 字符
+            char : Character
         Return :
-            bool : 判断结果
+            bool : Result
         """
         if char == " " or char == "\t" or char == "\n" or char == "\r":
             return True
@@ -216,11 +215,11 @@ class Serializer():
     def is_chinese_char(cp):
         """
         
-        判断字符是否为中文字符
+        Determine whether the character is a chinese character
         Arg :
-            cp (char): 字符
+            cp (char): Character
         Return :
-            bool : 判断结果
+            bool : Result
         
         """
        
@@ -238,11 +237,11 @@ class Serializer():
     @staticmethod
     def is_punctuation(char):
         """
-        判断字符是否为标点字符
+        Determine whether the character is a punctuation character
         Arg :
-            char : 字符
+            char : Character
         Return :
-            bool : 判断结果
+            bool : Result
         """
         cp = ord(char)
         

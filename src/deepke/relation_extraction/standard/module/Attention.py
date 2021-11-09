@@ -13,16 +13,17 @@ class DotAttention(nn.Module):
 
     def forward(self, Q, K, V, mask_out=None, head_mask=None):
         """
-        一般输入信息 X 时，假设 K = V = X
-
+        Generally, when inputting information X, assume K = V = X
         att_weight = softmax( score_func(q, k) )
         att = sum( att_weight * v )
-
-        :param Q: [..., L, H]
-        :param K: [..., S, H]
-        :param V: [..., S, H]
-        :param mask_out: [..., 1, S]
-        :return:
+        Args :
+            Q: [..., L, H]
+            K: [..., S, H]
+            V: [..., S, H]
+            : [..., 1, S]
+        Returns:
+            attention_out: Attention
+            attention_weight: Weight after attention
         """
         H = Q.size(-1)
 
@@ -30,7 +31,6 @@ class DotAttention(nn.Module):
         attention_weight = torch.matmul(Q, K.transpose(-1, -2)) / scale
 
         if mask_out is not None:
-            # 当 DotAttention 单独使用时（几乎不会），保证维度一样
             while mask_out.dim() != Q.dim():
                 mask_out = mask_out.unsqueeze(1)
             attention_weight.masked_fill_(mask_out, -1e8)
@@ -39,8 +39,7 @@ class DotAttention(nn.Module):
 
         attention_weight = F.dropout(attention_weight, self.dropout)
 
-        # mask heads if we want to:
-        # multi head 才会使用
+       
         if head_mask is not None:
             attention_weight = attention_weight * head_mask
 
@@ -52,9 +51,10 @@ class DotAttention(nn.Module):
 class MultiHeadAttention(nn.Module):
     def __init__(self, embed_dim, num_heads, dropout=0.0, output_attentions=True):
         """
-        :param embed_dim: 输入的维度，必须能被 num_heads 整除
-        :param num_heads: attention 的个数
-        :param dropout: float。
+        Args:
+            embed_dim: The input dimension must be divisible by num_heads
+            num_heads: The number of attention
+            dropout: float。
         """
         super(MultiHeadAttention, self).__init__()
         self.num_heads = num_heads
@@ -72,12 +72,13 @@ class MultiHeadAttention(nn.Module):
 
     def forward(self, Q, K, V, key_padding_mask=None, attention_mask=None, head_mask=None):
         """
-        :param Q: [B, L, Hs]
-        :param K: [B, S, Hs]
-        :param V: [B, S, Hs]
-        :param key_padding_mask: [B, S]                为 1/True 的地方需要 mask
-        :param attention_mask: [S] / [L, S] 指定位置 mask 掉， 为 1/True 的地方需要 mask
-        :param head_mask: [N] 指定 head mask 掉，        为 1/True 的地方需要 mask
+        Args:
+            Q: [B, L, Hs]
+            K: [B, S, Hs]
+            V: [B, S, Hs]
+            key_padding_mask: [B, S] , Mask is required where it is 1/True
+            attention_mask: [S] / [L, S] The specified position mask is dropped, and the mask is needed where it is 1/True
+            head_mask: [N] Specify the head mask off,the specified position mask is dropped, and the mask is needed where it is 1/True
         """
         B, L, Hs = Q.shape
         S = V.size(1)

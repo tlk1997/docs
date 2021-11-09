@@ -112,7 +112,7 @@ class Serializer():
         text = text.strip()
         if not text:
             return []
-        # 常见的断句标点
+        
         punc = """,.?!;: 、｜，。？！；：《》「」【】/<>|\“ ”‘ ’"""
         punc_re = '|'.join(re.escape(x) for x in punc)
         tokens = re.sub(punc_re, lambda x: ' ' + x.group() + ' ', text)
