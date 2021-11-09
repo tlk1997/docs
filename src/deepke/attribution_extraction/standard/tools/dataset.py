@@ -10,10 +10,10 @@ def collate_fn(cfg):
     def collate_fn_intra(batch):
         """
     Arg : 
-        batch () : 数据集
+        batch () : Data
     Returna : 
-        x (dict) : key为词，value为长度
-        y (List) : 关系对应值的集合
+        x (dict) : key is the words，and value is its length.
+        y (List) : Collection of key-values pairs.
     """
         batch.sort(key=lambda data: data['seq_len'], reverse=True)
 
@@ -59,7 +59,7 @@ def collate_fn(cfg):
 
 class CustomDataset(Dataset):
     """
-    默认使用 List 存储数据
+    Use List to store data by default.
     """
     def __init__(self, fp):
         self.file = load_pkl(fp)

@@ -22,6 +22,14 @@ __all__ = [
     "preprocess"
 ]
 def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
+    """
+    Handle sentence length,and set sentence length limit.
+    Args :
+        pos (List[int]) : List of sentence
+        limit (int) : Limit number
+    Return :
+        [p + limit + 1 for p in pos] (List[int]) : Results after handling
+    """
     for i,p in enumerate(pos):
         if p > limit:
             pos[i] = limit
@@ -30,6 +38,12 @@ def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
     return [p + limit + 1 for p in pos]
 
 def _add_pos_seq(train_data: List[Dict], cfg):
+    """
+    Add position sequence
+    Args : 
+        train_data (List[Dict]) : Training data
+        cfg : Config file
+    """
     for d in train_data:
         entities_idx = [d['entity_index'],d['attribute_value_index']
                 ] if d['entity_index'] < d['attribute_value_index'] else [d['entity_index'], d['attribute_value_index']]
@@ -46,6 +60,12 @@ def _add_pos_seq(train_data: List[Dict], cfg):
                                     [3] * (d['seq_len'] - entities_idx[1])
 
 def _convert_tokens_into_index(data: List[Dict], vocab):
+    """
+    Convert tokens to index 
+    Args : 
+        data (List[Dict]) : Data
+        vocab (Class) : Vocabulary 
+    """
     unk_str = '[UNK]'
     unk_idx = vocab.word2idx[unk_str]
 
@@ -53,15 +73,27 @@ def _convert_tokens_into_index(data: List[Dict], vocab):
         d['token2idx'] = [vocab.word2idx.get(i, unk_idx) for i in d['tokens']]
         d['seq_len'] = len(d['token2idx'])
 
-def _serialize_sentence(data: List[Dict], serial, cfg):
+def _serialize_sentence(data: List[Dict], serial):
+    """
+    Sentence to tokens
+    Args : 
+        data (List[Dict]) : Data 
+        serial (Class): Serializer class
+    """
     for d in data:
         sent = d['sentence'].strip()
-        snet = sent.replace(d['entity'] , ' entity ' , 1).replace(d['attribute_value'] , ' attribute_value ' , 1)
+        sent = sent.replace(d['entity'] , ' entity ' , 1).replace(d['attribute_value'] , ' attribute_value ' , 1)
         d['tokens'] = serial(sent, never_split=['entity','attribute_value'])
         entity_index, attribute_value_index = d['entity_offset'] , d['attribute_value_offset']
         d['entity_index'],d['attribute_value_index'] = int(entity_index) , int(attribute_value_index)
        
 def _lm_serialize(data: List[Dict], cfg):
+    """
+    LM model to serialize
+    Args :
+        data (List[Dict]) : Data
+        cfg : Config file
+    """
     logger.info('use bert tokenizer...')
     tokenizer = BertTokenizer.from_pretrained(cfg.lm_file)
     for d in data:
@@ -71,10 +103,23 @@ def _lm_serialize(data: List[Dict], cfg):
         d['seq_len'] = len(d['token2idx'])
 
 def _add_attribute_data(atts: Dict, data: List) -> None:
+    """
+    Add attribute data
+    Args :
+        rels (Dict) : Attribute Dict
+        data (List) : Data to add attributation
+    """
     for d in data:
         d['att2idx'] = atts[d['attribute']]['index']
 
 def _handle_attribute_data(attribute_data: List[Dict]) -> Dict:
+    """
+    Handle attribute data 
+    Arg : 
+        attribute_data (List[Dict]) : Data
+    Return :
+        atts (Dict) : Results after handling
+    """
     atts = OrderedDict()
     attribute_data = sorted(attribute_data, key=lambda i: int(i['index']))
     for d in attribute_data:

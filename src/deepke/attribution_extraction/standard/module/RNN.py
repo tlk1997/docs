@@ -6,7 +6,8 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 class RNN(nn.Module):
     def __init__(self, config):
         """
-        type_rnn: RNN, GRU, LSTM 可选
+        Args:
+            type_rnn: RNN, GRU, LSTM 
         """
         super(RNN, self).__init__()
 
@@ -47,11 +48,11 @@ class RNN(nn.Module):
     def forward(self, x, x_len):
         """
         Args: 
-            torch.Tensor [batch_size, seq_max_length, input_size], [B, L, H_in] 一般是经过embedding后的值
-            x_len: torch.Tensor [L] 已经排好序的句长值
+            torch.Tensor [batch_size, seq_max_length, input_size], [B, L, H_in],the value after embedding
+            x_len: torch.Tensor [L], sentence length value by order
         Returns:
-            output: torch.Tensor [B, L, H_out] 序列标注的使用结果
-            hn:     torch.Tensor [B, N, H_out] / [B, H_out] 分类的结果，当 last_layer_hn 时只有最后一层结果
+            output: torch.Tensor [B, L, H_out], the result of using sequence annotation
+            hn:     torch.Tensor [B, N, H_out] / [B, H_out], the result of classification, when last_layer_hn is the result of the last layer
         """
         B, L, _ = x.size()
         H, N = self.hidden_size, self.num_layers
