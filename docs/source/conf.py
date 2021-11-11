@@ -19,7 +19,7 @@ import deepke
 # -- Project information -----------------------------------------------------
 
 project = 'DeepKE'
-copyright = '2021, zjunlp'
+copyright = '2021, ZJUNLP'
 author = 'tlk'
 
 # The full version, including alpha/beta/rc tags
