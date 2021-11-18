@@ -24,10 +24,10 @@ Path = str
 def load_pkl(fp: Path, verbose: bool = True) -> Any:
     """
     Read from pkl file
-    Args :
+    Args:
         fp (String) : Address of data
         verbose (bool) : Whether to print log
-    Return : 
+    Returns: 
         data (Any) : Data after reading
     """
     if verbose:
@@ -41,7 +41,7 @@ def load_pkl(fp: Path, verbose: bool = True) -> Any:
 def save_pkl(data: Any, fp: Path, verbose: bool = True) -> None:
     """
     Save as pkl file
-    Args :
+    Args:
         data (Any) : Data to save
         fp (String) : Address of data
         verbose (bool) : Whether to print log
@@ -56,11 +56,11 @@ def save_pkl(data: Any, fp: Path, verbose: bool = True) -> None:
 def load_csv(fp: Path, is_tsv: bool = False, verbose: bool = True) -> List:
     """
     Read from csv file
-    Args :
+    Args:
         fp (String) : Address of data
         is_tsv (bool) : Whether it is in excel-tab format
         verbose (bool) : Whether to print log
-    Return :
+    Returns:
         list(reader) (List): List data after reading
     """
     if verbose:
@@ -75,7 +75,7 @@ def load_csv(fp: Path, is_tsv: bool = False, verbose: bool = True) -> List:
 def save_csv(data: List[Dict], fp: Path, save_in_tsv: False, write_head=True, verbose=True) -> None:
     """
     Save as csv file
-    Args :
+    Args:
         data (List) : List data for saving
         fp (String) : Address of data
         save_in_tsv (bool) : Whether it is in excel-tab format
@@ -101,7 +101,7 @@ def load_jsonld(fp: Path, verbose: bool = True) -> List:
     Args:
         fp (String): Address of data
         verbose (bool): Whether to print log
-    Return: 
+    Returns: 
         datas (List) : List data after reading
     """
     if verbose:
@@ -130,7 +130,7 @@ def jsonld2csv(fp: str, verbose: bool = True) -> str:
     Args:
         fp (String): Address of jsonld file
         verbose (bool): Whether to print log
-    Return: 
+    Returns: 
         fp_new (String): Address of new file
     """
     data = []
@@ -160,7 +160,7 @@ def csv2jsonld(fp: str, verbose: bool = True) -> str:
     Args:
         fp (String): Address of csv file
         verbose (bool): Whether to print
-    Return: 
+    Returns: 
         fp_new (String): Address of new file 
     """
     data = []

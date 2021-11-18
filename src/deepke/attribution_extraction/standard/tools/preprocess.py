@@ -24,10 +24,10 @@ __all__ = [
 def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
     """
     Handle sentence length,and set sentence length limit.
-    Args :
+    Args:
         pos (List[int]) : List of sentence
         limit (int) : Limit number
-    Return :
+    Returns:
         [p + limit + 1 for p in pos] (List[int]) : Results after handling
     """
     for i,p in enumerate(pos):
@@ -40,7 +40,7 @@ def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
 def _add_pos_seq(train_data: List[Dict], cfg):
     """
     Add position sequence
-    Args : 
+    Args: 
         train_data (List[Dict]) : Training data
         cfg : Config file
     """
@@ -62,7 +62,7 @@ def _add_pos_seq(train_data: List[Dict], cfg):
 def _convert_tokens_into_index(data: List[Dict], vocab):
     """
     Convert tokens to index 
-    Args : 
+    Args: 
         data (List[Dict]) : Data
         vocab (Class) : Vocabulary 
     """
@@ -76,7 +76,7 @@ def _convert_tokens_into_index(data: List[Dict], vocab):
 def _serialize_sentence(data: List[Dict], serial):
     """
     Sentence to tokens
-    Args : 
+    Args: 
         data (List[Dict]) : Data 
         serial (Class): Serializer class
     """
@@ -90,7 +90,7 @@ def _serialize_sentence(data: List[Dict], serial):
 def _lm_serialize(data: List[Dict], cfg):
     """
     LM model to serialize
-    Args :
+    Args:
         data (List[Dict]) : Data
         cfg : Config file
     """
@@ -105,7 +105,7 @@ def _lm_serialize(data: List[Dict], cfg):
 def _add_attribute_data(atts: Dict, data: List) -> None:
     """
     Add attribute data
-    Args :
+    Args:
         rels (Dict) : Attribute Dict
         data (List) : Data to add attributation
     """
@@ -115,9 +115,9 @@ def _add_attribute_data(atts: Dict, data: List) -> None:
 def _handle_attribute_data(attribute_data: List[Dict]) -> Dict:
     """
     Handle attribute data 
-    Arg : 
+    Args: 
         attribute_data (List[Dict]) : Data
-    Return :
+    Returns:
         atts (Dict) : Results after handling
     """
     atts = OrderedDict()

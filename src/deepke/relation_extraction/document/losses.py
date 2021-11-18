@@ -4,13 +4,10 @@ import torch.nn.functional as F
 
 
 def multilabel_categorical_crossentropy(y_true, y_pred):
-    """多标签分类的交叉熵
-    说明：y_true和y_pred的shape一致，y_true的元素非0即1，
-         1表示对应的类为目标类，0表示对应的类为非目标类。
-    警告：请保证y_pred的值域是全体实数，换言之一般情况下y_pred
-         不用加激活函数，尤其是不能加sigmoid或者softmax！预测
-         阶段则输出y_pred大于0的类。如有疑问，请仔细阅读并理解
-         本文。
+    """
+    Multilabel categorical crossentroy
+    Description: y_ True and Y_ The shape of PRED is consistent, y_ The element of true is either 0 or 1,1 indicates that the corresponding class is the target class, and 0 indicates that the corresponding class is a non target class.
+    Warning: please ensure Y_ The value range of PRED is all real numbers, in other words, in general, y_ pred.Do not add activation functions, especially sigmoid or softmax! forecast.Phase outputs y_ Classes with PRED greater than 0. If you have any questions, please read and understand them carefully this paper.
     """
     y_pred = (1 - 2 * y_true) * y_pred
     y_pred_neg = y_pred - y_true * 1e30

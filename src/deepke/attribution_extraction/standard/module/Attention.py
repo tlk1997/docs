@@ -18,7 +18,7 @@ class DotAttention(nn.Module):
         att_weight = softmax( score_func(q, k) )
         att = sum( att_weight * v )
 
-        Args :
+        Args:
             Q: [..., L, H]
             K: [..., S, H]
             V: [..., S, H]

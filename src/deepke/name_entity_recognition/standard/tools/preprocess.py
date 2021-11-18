@@ -10,7 +10,9 @@ import sys
 import numpy as np
 
 class NerProcessor(DataProcessor):
-    """Processor for the dataset."""
+    """
+    Processor for the dataset.
+    """
 
     def get_train_examples(self, data_dir):
         """See base class."""
@@ -41,7 +43,16 @@ class NerProcessor(DataProcessor):
         return examples
 
 def convert_examples_to_features(examples, label_list, max_seq_length, tokenizer):
-    """Loads a data file into a list of `InputBatch`s."""
+    """
+    Loads a data file into a list of `InputBatch`s.
+    Args:
+        examples(List): Examples
+        label_list(List): Label list
+        max_seq_length(int): Sequence's max length
+        tokenizer: Tokenizer
+    Returns:
+        features: Results after processing
+        """
 
     label_map = {label : i for i, label in enumerate(label_list,1)}
 

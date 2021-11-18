@@ -4,11 +4,11 @@ class InputExample(object):
     def __init__(self, guid, text_a, text_b=None, label=None):
         """
         Constructs a InputExample.
-            Args:
-                guid(string): Unique id for the example.
-                text_a(string): The untokenized text of the first sequence. For single sequence tasks, only this sequence must be specified.
-                text_b(string, optional): The untokenized text of the second sequence. Only must be specified for sequence pair tasks.
-                label(string, optional): The label of the example. This should be specified for train and dev examples, but not for test examples.
+        Args:
+            guid(string): Unique id for the example.
+            text_a(string): The untokenized text of the first sequence. For single sequence tasks, only this sequence must be specified.
+            text_b(string, optional): The untokenized text of the second sequence. Only must be specified for sequence pair tasks.
+            label(string, optional): The label of the example. This should be specified for train and dev examples, but not for test examples.
         """
         self.guid = guid
         self.text_a = text_a
@@ -52,7 +52,9 @@ def readfile(filename):
     return data
 
 class DataProcessor(object):
-    """Base class for data converters for sequence classification data sets."""
+    """
+    Base class for data converters for sequence classification data sets.
+    """
 
     def get_train_examples(self, data_dir):
         """Gets a collection of `InputExample`s for the train set."""

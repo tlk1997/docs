@@ -56,7 +56,7 @@ class Vocab(object):
     def _add_word(self, word: str):
         """
             Add single word
-            Arg :
+            Args:
                 word (String) : Word to add
         """
         if word not in self.word2idx:
@@ -70,7 +70,7 @@ class Vocab(object):
     def add_words(self, words: Sequence):
         """
             Add words
-            Arg :
+            Args:
                 words (List) : List of words
         """
         for word in words:

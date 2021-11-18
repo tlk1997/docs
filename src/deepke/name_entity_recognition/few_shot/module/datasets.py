@@ -154,6 +154,9 @@ class ConllNERProcessor(object):
         return data_dict
 
     def _add_tags_to_tokens(self):
+        """
+        Add tags to tokens
+        """
         mapping = self.mapping
         if self.learn_weights:  # add extra tokens to huggingface tokenizer
             self.mapping2id = {} 
@@ -228,13 +231,5 @@ class ConllNERDataset(Dataset):
         return src_tokens, tgt_tokens, torch.stack(src_seq_len, 0), torch.stack(tgt_seq_len, 0), first, target_span
 
 
-if __name__ == '__main__':
-    data_path = {'train':'data/conll2003/train.txt'}
-    bart_name = '../BARTNER-AMAX/facebook/'
-    conll_processor = ConllNERProcessor(data_path, bart_name)
-    conll_datasets = ConllNERDataset(conll_processor, mode='train')
-    conll_dataloader = DataLoader(conll_datasets, collate_fn=conll_datasets.collate_fn, batch_size=8)
-    for idx, data in enumerate(conll_dataloader):
-        print(data)
-        break
+
     

@@ -17,10 +17,10 @@ class Serializer():
     def serialize(self, text, never_split: List = None):
         """
         Split a piece of text into a vocabulary list according to the established splitting rules
-        Args :
+        Args:
             text (String) : Text for spliting
             never_split (List) : Words not to be split, empty by default
-        Rerurn : 
+        Returns: 
             output_tokens (List): Results after spliting
         """
         never_split = self.never_split + (never_split if never_split is not None else [])
@@ -46,9 +46,9 @@ class Serializer():
     def _clean_text(self, text):
         """
         Delete invalid characters and blank characters in the text
-        Arg :
+        Args:
             text (String) : Text to be deleted
-        Return :
+        Returns:
             "".join(output) (String) : Text after deleted
         """
         output = []
@@ -65,10 +65,10 @@ class Serializer():
     def _use_jieba_cut(self, text, never_split):
         """
         Use jieba
-        Args :
+        Args:
             text (String) : Text to be splited
             never_split (List) : Words not to be split
-        Return :
+        Returns:
             tokens (List) : Text after splited
         """
         for word in never_split:
@@ -85,9 +85,9 @@ class Serializer():
     def _tokenize_chinese_chars(self, text):
         """
         Add spaces around CJK characters
-        Arg :
+        Args:
             text (String) : Text to be added
-        Return :
+        Returns:
             "".join(output) (String) : Text after added
         """
         output = []
@@ -104,9 +104,9 @@ class Serializer():
     def _orig_tokenize(self, text):
         """
         Split text on white space and some punctuation marks (such as commas or periods)
-        Arg :
+        Args:
             text (String) : Text to be splited
-        Return :
+        Returns:
             tokens (List) : Text after splited
         """
         text = text.strip()
@@ -122,9 +122,9 @@ class Serializer():
     def _whitespace_tokenize(self, text):
         """
         Perform basic whitespace cleaning and segmentation
-        Arg :
+        Args:
             text (String) : Text to be splited
-        Return :
+        Returns:
             tokens (List) : Text after splited
         """
         text = text.strip()
@@ -136,9 +136,9 @@ class Serializer():
     def _run_strip_accents(self, text):
         """
         Delete accent marks from text
-        Arg :
+        Args:
             text (String) : Text to be deleted
-        Return :
+        Returns:
             "".join(output) (String) : Text to after deleted
 
         """
@@ -154,10 +154,10 @@ class Serializer():
     def _run_split_on_punc(self, text, never_split=None):
         """
         Split text by punctuation
-        Args :
+        Args:
             text (String) : Text to be splited
             never_split (List) : Words not to be split, empty by default
-        Return :
+        Returns:
             ["".join(x) for x in output] (List) : Text to after splited
         """
         
@@ -185,9 +185,9 @@ class Serializer():
     def is_control(char):
         """
         Determine whether the character is a control character
-        Arg :
+        Args:
             char : Character
-        Return :
+        Returns:
             bool : Result
         """
         # These are technically control characters but we count them as whitespace
@@ -203,9 +203,9 @@ class Serializer():
     def is_whitespace(char):
         """
         Determine whether the character is a whitespace character
-        Arg :
+        Args:
             char : Character
-        Return :
+        Returns:
             bool : Result
         """
         # \t, \n, and \r are technically contorl characters but we treat them
@@ -223,9 +223,9 @@ class Serializer():
         
         Determine whether the character is a chinese character
 
-        Arg :
+        Args:
             cp (char): Character
-        Return :
+        Returns:
             bool : Result
         
         """
@@ -252,9 +252,9 @@ class Serializer():
     def is_punctuation(char):
         """
         Determine whether the character is a punctuation character
-        Arg :
+        Args:
             char : Character
-        Return :
+        Returns:
             bool : Result
         """
         cp = ord(char)

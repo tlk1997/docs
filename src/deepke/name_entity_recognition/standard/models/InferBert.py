@@ -41,6 +41,16 @@ class InferNer:
         self.model.eval()
 
     def load_model(self, model_dir: str, model_config: str = "model_config.json"):
+        """
+        Load model
+        Args:
+            model_dir(str): The path of the model
+            model_config(str): The path of model 's configuration.
+        Returns: 
+            model: Returned model
+            tokenizer: Returned tokenizer
+            model_config: Returned configuration
+        """
         model_config = os.path.join(model_dir,model_config)
         model_config = json.load(open(model_config))
         model = BertNer.from_pretrained(model_dir)
@@ -48,7 +58,14 @@ class InferNer:
         return model, tokenizer, model_config
 
     def tokenize(self, text: str):
-        """ tokenize input"""
+        """
+        tokenize input
+        Args:
+            text(str): Text needed to be tokenized
+        Returns:
+            tokens(List): Words after tokenizing
+            valid_positions(List): Valid position.
+        """
         words = list(text)
         tokens = []
         valid_positions = []
@@ -63,7 +80,13 @@ class InferNer:
         return tokens, valid_positions
 
     def preprocess(self, text: str):
-        """ preprocess """
+        """ 
+        Preprocess
+        Args:
+            text(str): Text needed to be preprocessed
+        Returns:
+            Result after preprocessing
+        """
         tokens, valid_positions = self.tokenize(text)
         ## insert "[CLS]"
         tokens.insert(0,"[CLS]")
@@ -84,6 +107,13 @@ class InferNer:
         return input_ids,input_mask,segment_ids,valid_positions
 
     def predict(self, text: str):
+        """
+        Predict
+        Args:
+            text(str): Text needed to be predicted
+        Returns:
+            tag(Dict): Results
+        """
         input_ids,input_mask,segment_ids,valid_ids = self.preprocess(text)
         input_ids = torch.tensor([input_ids],dtype=torch.long,device=self.device)
         input_mask = torch.tensor([input_mask],dtype=torch.long,device=self.device)

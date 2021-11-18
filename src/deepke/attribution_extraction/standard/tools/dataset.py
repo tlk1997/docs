@@ -9,9 +9,9 @@ def collate_fn(cfg):
     
     def collate_fn_intra(batch):
         """
-        Arg : 
+        Args: 
             batch () : Data
-        Returns : 
+        Returns: 
             x (dict) : key is the words，and value is its length.
             y (List) : Collection of key-values pairs.
         """

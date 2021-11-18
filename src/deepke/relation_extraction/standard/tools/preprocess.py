@@ -24,10 +24,10 @@ __all__ = [
 def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
     """
     Handle sentence length,and set sentence length limit.
-    Args :
+    Args:
         pos (List[int]) : List of sentence
         limit (int) : Limit number
-    Return :
+    Returns:
         [p + limit + 1 for p in pos] (List[int]) : Results after handling
     """
     for i, p in enumerate(pos):
@@ -41,7 +41,7 @@ def _handle_pos_limit(pos: List[int], limit: int) -> List[int]:
 def _add_pos_seq(train_data: List[Dict], cfg):
     """
     Add position sequence
-    Args : 
+    Args: 
         train_data (List[Dict]) : Training data
         cfg : Config file
     """
@@ -64,7 +64,7 @@ def _add_pos_seq(train_data: List[Dict], cfg):
 def _convert_tokens_into_index(data: List[Dict], vocab):
     """
     Convert tokens to index 
-    Args : 
+    Args: 
         data (List[Dict]) : Data
         vocab (Class) : Vocabulary 
     """
@@ -79,7 +79,7 @@ def _convert_tokens_into_index(data: List[Dict], vocab):
 def _serialize_sentence(data: List[Dict], serial, cfg):
     """
     Sentence to tokens
-    Args : 
+    Args: 
         data (List[Dict]) : Data 
         serial (Class): Serializer class
         cfg : Config file
@@ -106,7 +106,7 @@ def _serialize_sentence(data: List[Dict], serial, cfg):
 def _lm_serialize(data: List[Dict], cfg):
     """
     LM model to serialize
-    Args :
+    Args:
         data (List[Dict]) : Data
         cfg : Config file
     """
@@ -123,7 +123,7 @@ def _lm_serialize(data: List[Dict], cfg):
 def _add_relation_data(rels: Dict, data: List) -> None:
     """
     Add relation data
-    Args :
+    Args:
         rels (Dict) : Relation Dict
         data (List) : Data to add relation
     """
@@ -136,9 +136,9 @@ def _add_relation_data(rels: Dict, data: List) -> None:
 def _handle_relation_data(relation_data: List[Dict]) -> Dict:
     """
     Handle relation data 
-    Arg : 
+    Args: 
         relation_data (List[Dict]) : Data
-    Return :
+    Returns:
         rels (Dict) : Results after handling
     """
     rels = OrderedDict()

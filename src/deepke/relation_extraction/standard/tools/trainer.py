@@ -18,7 +18,7 @@ def train(epoch, model, dataloader, optimizer, criterion, device, writer, cfg):
             device (torch.device): device of training.
             writer (class): output to tensorboard.
             cfg: configutation of training.
-        Return:
+        Returns:
             losses[-1] : the loss of training
     """
     model.train()
@@ -78,7 +78,7 @@ def validate(epoch, model, dataloader, criterion, device, cfg):
             criterion (Callable): loss criterion of validating.
             device (torch.device): device of validating.
             cfg: configutation of validating.
-        Return:
+        Returns:
             f1 : f1 score
             loss : the loss of validating
     """
