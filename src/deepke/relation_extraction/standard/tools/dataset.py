@@ -59,7 +59,7 @@ def collate_fn(cfg):
 
 class CustomDataset(Dataset):
     """
-    默认使用 List 存储数据
+    Use List to store data by default
     """
     def __init__(self, fp):
         self.file = load_pkl(fp)
