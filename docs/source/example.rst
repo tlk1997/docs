@@ -55,6 +55,7 @@ Enter  ``DeepKE/example/ner/few-shot`` .
 Get data:
 
     `wget 120.27.214.45/Data/ner/few_shot/data.tar.gz`
+
     `tar -xzvf data.tar.gz`
 
 The directory where the model is loaded and saved and the configuration parameters can be cusomized in the ``conf`` folder.The dataset can be customized in the ``data`` folder.
@@ -100,6 +101,7 @@ Enter the ``DeepKE/example/re/standard`` folder.
 Get data:
 
     `wget 120.27.214.45/Data/re/standard/data.tar.gz`
+
     `tar -xzvf data.tar.gz`
 
 The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
@@ -141,6 +143,7 @@ Enter ``DeepKE/example/re/few-shot`` .
 Get data:
 
     `wget 120.27.214.45/Data/re/few_shot/data.tar.gz`
+    
     `tar -xzvf data.tar.gz`
 
 The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
