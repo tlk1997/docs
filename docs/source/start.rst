@@ -65,7 +65,7 @@ We use the following datasets in our experiments:
 |                          |           |                  |          | RNN        |
 |                          |           |                  |          +------------+
 |                          |           |Triplet Extraction|          | Capsule    |
-| Attribute Extraction     | Standard  |Dataset 2         | Chinese  +------------+
+| Attribute Extraction     | Standard  |Dataset           | Chinese  +------------+
 |                          |           |                  |          | GCN        |
 |                          |           |                  |          +------------+
 |                          |           |                  |          | Transformer|
