@@ -52,6 +52,7 @@ This module is in the low-resouce scenario.
 Enter  ``DeepKE/example/ner/few-shot`` . 
 
 **Step 2**
+
 Get data:
 
     `wget 120.27.214.45/Data/ner/few_shot/data.tar.gz`
