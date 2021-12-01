@@ -19,6 +19,15 @@ Get data:
 
 The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
 
+Dataset needs to be input as ``TXT`` file
+
+The `data's format` of file needs to comply with the following：
+
+杭 B-LOC '\\n'
+州 I-LOC '\\n'
+真 O '\\n'
+美 O '\\n'
+
 **Step 3**
 
 Train:
@@ -60,6 +69,20 @@ Get data:
     `tar -xzvf data.tar.gz`
 
 The directory where the model is loaded and saved and the configuration parameters can be cusomized in the ``conf`` folder.The dataset can be customized in the ``data`` folder.
+
+Dataset needs to be input as ``TXT`` file
+
+The `data's format` of file needs to comply with the following：
+
+EU	B-ORG '\\n'
+rejects	O '\\n'
+German	B-MISC '\\n'
+call	O '\\n'
+to	O '\\n'
+boycott	O '\\n'
+British	B-MISC '\\n'
+lamb	O '\\n'
+.	O '\\n'
 
 **Step 3**
 
@@ -107,6 +130,21 @@ Get data:
 
 The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
 
+Dataset needs to be input as ``CSV`` file.
+
+The `data's format` of file needs to comply with the following：
+
++--------------------------+-----------+------------+-------------+------------+------------+
+| Sentence                 | Relation  | Head       | Head_offset |  Tail      | Tail_offset|
++--------------------------+-----------+------------+-------------+------------+------------+
+
+The relation's format of file needs to comply with the following：
+
++------------+-----------+------------------+-------------+
+| Head_type  | Tail_type | relation         | Index       |
++------------+-----------+------------------+-------------+
+
+
 **Step 3**
 
 Train:
@@ -148,6 +186,16 @@ Get data:
     `tar -xzvf data.tar.gz`
 
 The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
+
+Dataset needs to be input as ``TXT`` file and ``JSON`` file.
+
+The `data's format` of file needs to comply with the following：
+
+{"token": ["the", "most", "common", "audits", "were", "about", "waste", "and", "recycling", "."], "h": {"name": "audits", "pos": [3, 4]}, "t": {"name": "waste", "pos": [6, 7]}, "relation": "Message-Topic(e1,e2)"}
+
+The relation's format of file needs to comply with the following：
+
+{"Other": 0 , "Message-Topic(e1,e2)": 1 ... }
 
 **Step 3**
 
@@ -193,6 +241,24 @@ Get data:
 
 The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
 
+
+Dataset needs to be input as ``JSON`` file
+
+The `data's format` of file needs to comply with the following：
+
+[{"vertexSet": [[{"name": "Lark Force", "pos": [0, 2], "sent_id": 0, "type": "ORG"},...]], 
+
+"labels": [{"r": "P607", "h": 1, "t": 3, "evidence": [0]}, ...], 
+
+"title": "Lark Force",
+
+"sents": [["Lark", "Force", "was", "an", "Australian", "Army", "formation", "established", "in", "March", "1941", "during", "World", "War", "II", "for", "service", "in", "New", "Britain", "and", "New", "Ireland", "."],...}]
+
+
+The relation's format of file needs to comply with the following：
+
+{"P1376": 79,"P607": 27,...}
+
 **Step 3**
 
 Train:
@@ -236,6 +302,20 @@ Get data:
     `tar -xzvf data.tar.gz`
 
 The dataset and parameters can be customized in the ``data`` folder and ``conf`` folder respectively.
+
+Dataset needs to be input as ``CSV`` file.
+
+The `data's format` of file needs to comply with the following：
+
++--------------------------+------------+------------+---------------+-------------------+-----------------------+
+| Sentence                 | Attribute  | Entity     | Entity_offset |  Attribute_value  | Attribute_value_offset|
++--------------------------+------------+------------+---------------+-------------------+-----------------------+
+
+The attribute's format of file needs to comply with the following：
+
++-------------------+-------------+
+| Attribute         | Index       |
++-------------------+-------------+
 
 **Step 3**
 
