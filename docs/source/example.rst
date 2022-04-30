@@ -313,6 +313,8 @@ The relation's format of file needs to comply with the following：
 
 {"None":0,"/per/per/parent":1,"/per/per/siblings":2...}
 
+Instead of inputting the original images as visual datas directly, you can use a `Visual Grounding toolkit <https://github.com/zyang-ur/onestage_grounding>`_ to locate visual objects based on entities and entity types.
+
 **Step 3**
 
 Train:
