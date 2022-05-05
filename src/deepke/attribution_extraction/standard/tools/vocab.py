@@ -34,7 +34,7 @@ SPECIAL_TOKENS = OrderedDict(zip(SPECIAL_TOKENS_KEYS, SPECIAL_TOKENS_VALUES))
 
 class Vocab(object):
     """
-        Build vocabulary, add vocabulary,and delete low-frequency vocabulary
+        构建词汇表,增加词汇，删除低频词汇
     """
     def __init__(self, name: str = 'basic', init_tokens: Sequence = SPECIAL_TOKENS):
         self.name = name
@@ -48,16 +48,16 @@ class Vocab(object):
 
     def _add_init_tokens(self):
         """
-            Add origin tokens
+            添加初始tokens
         """
         for token in self.init_tokens.values():
             self._add_word(token)
 
     def _add_word(self, word: str):
         """
-            Add single word
-            Args:
-                word (String) : Word to add
+            增加单个词汇
+            Arg :
+                word (String) : 增加的词汇
         """
         if word not in self.word2idx:
             self.word2idx[word] = self.count
@@ -69,19 +69,19 @@ class Vocab(object):
 
     def add_words(self, words: Sequence):
         """
-            Add words
-            Args:
-                words (List) : List of words
+            通过数组增加词汇
+            Arg :
+                words (List) : 增加的词汇组
         """
         for word in words:
             self._add_word(word)
 
     def trim(self, min_freq=2, verbose: Optional[bool] = True):
         """
-            When the word frequency of word is lower than min_freq, delete from the thesaurus
+            当 word 词频低于 min_freq 时，从词库中删除
             Args:
-                min_freq (int): Minimum word frequency
-                verbose (bool) : Whether to print log
+                min_freq (int): 最低词频
+                verbose (bool) : 是否打印日志
         """
         assert min_freq == int(min_freq), f'min_freq must be integer, can\'t be {min_freq}'
         min_freq = int(min_freq)

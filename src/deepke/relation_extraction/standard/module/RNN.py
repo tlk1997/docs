@@ -6,8 +6,7 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 class RNN(nn.Module):
     def __init__(self, config):
         """
-        Args:
-            type_rnn: RNN, GRU, LSTM 
+        type_rnn: RNN, GRU, LSTM 可选
         """
         super(RNN, self).__init__()
 
@@ -29,28 +28,16 @@ class RNN(nn.Module):
                        bias=True,
                        batch_first=True)
 
-
-    def _init_weights(self):
-        """orthogonal init yields generally good results than uniform init"""
-        gain = 1  # use default value
-        for nth in range(self.num_layers * self.bidirectional):
-            # w_ih, (4 * hidden_size x input_size)
-            nn.init.orthogonal_(self.rnn.all_weights[nth][0], gain=gain)
-            # w_hh, (4 * hidden_size x hidden_size)
-            nn.init.orthogonal_(self.rnn.all_weights[nth][1], gain=gain)
-            # b_ih, (4 * hidden_size)
-            nn.init.zeros_(self.rnn.all_weights[nth][2])
-            # b_hh, (4 * hidden_size)
-            nn.init.zeros_(self.rnn.all_weights[nth][3])
+     
 
     def forward(self, x, x_len):
         """
         Args: 
-            torch.Tensor [batch_size, seq_max_length, input_size], [B, L, H_in],the value after embedding
-            x_len: torch.Tensor [L], sentence length value by order
+            torch.Tensor [batch_size, seq_max_length, input_size], [B, L, H_in] 一般是经过embedding后的值
+            x_len: torch.Tensor [L] 已经排好序的句长值
         Returns:
-            output: torch.Tensor [B, L, H_out], the result of using sequence annotation
-            hn:     torch.Tensor [B, N, H_out] / [B, H_out], the result of classification, when last_layer_hn is the result of the last layer
+            output: torch.Tensor [B, L, H_out] 序列标注的使用结果
+            hn:     torch.Tensor [B, N, H_out] / [B, H_out] 分类的结果，当 last_layer_hn 时只有最后一层结果
         """
         B, L, _ = x.size()
         H, N = self.hidden_size, self.num_layers

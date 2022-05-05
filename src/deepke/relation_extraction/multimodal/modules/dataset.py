@@ -43,7 +43,7 @@ class MMREProcessor(object):
 
         assert len(words) == len(relations) == len(heads) == len(tails) == (len(imgids))
 
-        # 辅助图像(VG)
+        # 辅助图像
         aux_imgs = None
         # if not self.use_clip_vit:
         aux_path = os.path.join(self.args.cwd,self.data_path[mode+"_auximgs"])
@@ -128,7 +128,7 @@ class MMREDataset(Dataset):
                 image = Image.open(img_path).convert('RGB')
                 image = self.processor.clip_processor(images=image, return_tensors='pt')['pixel_values'].squeeze()
             if self.aux_img_path is not None:
-                # 辅助图像(VG)
+                # 辅助图像
                 aux_imgs = []
                 aux_img_paths = []
                 imgid = imgid.split(".")[0]
@@ -149,7 +149,6 @@ class MMREDataset(Dataset):
                 aux_imgs = torch.stack(aux_imgs, dim=0)
                 assert len(aux_imgs) == 3
 
-                # rcnn
                 if self.rcnn_img_path is not None:
                     rcnn_imgs = []
                     rcnn_img_paths = []

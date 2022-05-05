@@ -1,6 +1,4 @@
 def eval_result(true_labels, pred_result, rel2id, logger, use_name=False):
-    """calculate the micro-average of p r f1"""
-
     correct = 0
     total = len(true_labels)
     correct_positive = 0

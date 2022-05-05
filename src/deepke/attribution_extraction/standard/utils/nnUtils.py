@@ -15,9 +15,7 @@ __all__ = [
 
 def manual_seed(seed: int = 1) -> None:
     """
-        Set seeds
-        Args: 
-            seed(int): The number of setting
+        设置seed。
     """
     random.seed(seed)
     np.random.seed(seed)
@@ -32,14 +30,14 @@ def manual_seed(seed: int = 1) -> None:
 
 def seq_len_to_mask(seq_len: Union[List, np.ndarray, torch.Tensor], max_len=None, mask_pos_to_true=True):
     """
-    Convert a one-dimensional array representing sequence length to a two-dimensional mask, the default position of the pad is 1.
-    Convert 1-d seq_len to 2-d mask.
+    将一个表示sequence length的一维数组转换为二维的mask，默认pad的位置为1。
+    转变 1-d seq_len到2-d mask。
 
-    Args:
-        seq_len (list, np.ndarray, torch.LongTensor) : shape will be (B,)
-        max_len (int): Pad the length to this length. The default (None) uses the longest length in seq_len. But in the scenario of nn.DataParallel, the seq_len of different cards may be different, so you need to pass in a max_len so that the length of the mask is from pad to that length.
-    Returns: 
-        mask (np.ndarray, torch.Tensor) : shape will be (B, max_length),the element is similar to bool or torch.uint8
+    Args :
+        seq_len (list, np.ndarray, torch.LongTensor) : shape将是(B,)
+        max_len (int): 将长度pad到这个长度。默认(None)使用的是seq_len中最长的长度。但在nn.DataParallel的场景下可能不同卡的seq_len会有区别，所以需要传入一个max_len使得mask的长度是pad到该长度。
+    Return: 
+        mask (np.ndarray, torch.Tensor) : shape将是(B, max_length)， 元素类似为bool或torch.uint8
     """
     if isinstance(seq_len, list):
         seq_len = np.array(seq_len)
@@ -65,10 +63,10 @@ def seq_len_to_mask(seq_len: Union[List, np.ndarray, torch.Tensor], max_len=None
 def to_one_hot(x: torch.Tensor, length: int) -> torch.Tensor:
     """
     Args:
-        x (torch.Tensor):[B] ,is generally the value of target
-        length (int) : L ,is generally the relationship tree.
-    Returns:
-        x_one_hot.to(device=x.device) (torch.Tensor) : [B, L] ,In each row, only the corresponding position is 1, and the rest are 0.
+        x (torch.Tensor):[B] , 一般是 target 的值
+        length (int) : L ,一般是关系种类树
+    Return:
+        x_one_hot.to(device=x.device) (torch.Tensor) : [B, L]  每一行，只有对应位置为1，其余为0
     """
     B = x.size(0)
     x_one_hot = torch.zeros(B, length)

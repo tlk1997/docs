@@ -25,7 +25,7 @@ class IFAREModel(nn.Module):
         self.vision_config.device = args.device
         self.model = IFAModel(self.vision_config, self.text_config)
 
-        # load pretrained parameters:
+        # load:
         vision_names, text_names = [], []
         model_dict = self.model.state_dict()
         for name in model_dict:

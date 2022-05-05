@@ -32,9 +32,10 @@ class Capsule(BasicModule):
         mask = seq_len_to_mask(lens)
         inputs = self.embedding(word, head_pos, tail_pos)
 
-        primary, _ = self.cnn(inputs)  
+        primary, _ = self.cnn(inputs)  # 由于长度改变，无法定向mask，不mask可可以，毕竟primary capsule 就是粗粒度的信息
         output = self.capsule(primary)
-        output = output.norm(p=2, dim=-1) 
+        output = output.norm(p=2, dim=-1)  # 求得模长再返回值
+
         return output  # [B, N]
 
     def loss(self, predict, target, reduction='mean'):
@@ -49,4 +50,5 @@ class Capsule(BasicModule):
         if reduction == 'sum':
             return loss.sum()
         else:
+            # 默认情况为求平均
             return loss.mean()

@@ -38,21 +38,21 @@ class Metric(metaclass=ABCMeta):
 class PRMetric():
     def __init__(self):
         """
-        Use sklearn
+        暂时调用 sklearn 的方法
         """
         self.y_true = np.empty(0)
         self.y_pred = np.empty(0)
 
     def reset(self):
         """
-        Reset to 0
+        重置为0
         """
         self.y_true = np.empty(0)
         self.y_pred = np.empty(0)
 
     def update(self, y_true: torch.Tensor, y_pred: torch.Tensor):
         """
-        Update tensor,keep the value, and cancel the original gradient.
+        更新tensor，保留值，取消原有梯度
         """
         y_true = y_true.cpu().detach().numpy()
         y_pred = y_pred.cpu().detach().numpy()
@@ -63,7 +63,7 @@ class PRMetric():
 
     def compute(self):
         """
-        Calculate acc,p,r,f1.
+        计算acc,p,r,f1并返回
         """
         p, r, f1, _ = precision_recall_fscore_support(self.y_true, self.y_pred, average='macro', warn_for=tuple())
         _, _, acc, _ = precision_recall_fscore_support(self.y_true, self.y_pred, average='micro', warn_for=tuple())

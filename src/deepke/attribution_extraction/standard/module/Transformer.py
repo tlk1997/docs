@@ -47,10 +47,10 @@ class TransformerAttention(nn.Module):
 
     def forward(self, x, key_padding_mask=None, attention_mask=None, head_mask=None):
         """
-        Args:
-            x: [B, L, Hs]
-            attention_mask: [B, L] After padding, 0 is added at the end of the sentence, the position of 0 is True, and the front part is False
-            head_mask: [L] [N,L]
+        :param x: [B, L, Hs]
+        :param attention_mask: [B, L] padding后的句子后面补0了，补0的位置为True，前面部分为False
+        :param head_mask: [L] [N,L]
+        :return:
         """
         attention_outputs = self.multihead_attention(x, x, x, key_padding_mask, attention_mask, head_mask)
         attention_output = attention_outputs[0]
@@ -114,11 +114,10 @@ class Transformer(nn.Module):
 
     def forward(self, hidden_states, key_padding_mask=None, attention_mask=None, head_mask=None):
         """
-        Args:
-            hidden_states: [B, L, Hs]
-            key_padding_mask: [B, S], Mask is required where it is 1/True
-            attn_mask: [S] / [L, S] , The specified position mask is dropped, and the mask is required where it is 1/True
-            head_mask: [N] / [L, N] , Specify the head mask to drop, the mask is required where 1/True is
+        :param hidden_states: [B, L, Hs]
+        :param key_padding_mask: [B, S]                   为 1/True 的地方需要 mask
+        :param attn_mask: [S] / [L, S] 指定位置 mask 掉，   为 1/True 的地方需要 mask
+        :param head_mask: [N] / [L, N] 指定 head mask 掉， 为 1/True 的地方需要 mask
         """
         if head_mask is not None:
             if head_mask.dim() == 1:
